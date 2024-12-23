@@ -1,0 +1,90 @@
+Apache Kafka 3 nodes Cluster : (Just in case, but we can use only a broker)
+
+In each node:  
+
+
+Start Zookeeper Server: 
+/home/hadoop/kafka/bin/zookeeper-server-start.sh /home/hadoop/kafka/config/zookeeper.properties
+
+
+Start Kafka Server:
+./bin/kafka-server-start.sh config/server.properties
+
+_________________________________________________________________________________
+Create Kafka Topic :
+
+
+./bin/kafka-topics.sh --create --bootstrap-server vps-data1:9092,vps-data2:9092,vps-data3:9092 --replication-factor 2 --partitions 3 --topic my-topic-test
+
+
+List Existing Topics:
+./bin/kafka-topics.sh --list --bootstrap-server vps-data1:9092,vps-data2:9092,vps-data3:9092
+
+
+Delete Kafka Topic:
+./bin/kafka-topics.sh --delete --bootstrap-server vps-data1:9092,vps-data2:9092,vps-data3:9092 --topic my-topic-test
+
+______________________________________________________________________
+
+Create Kafka Producer Console: 
+./bin/kafka-console-producer.sh --bootstrap-server vps-data1:9092,vps-data2:9092,vps-data3:9092 --topic my-topic-test
+
+Create Kafka Consumer Console: 
+./bin/kafka-console-consumer.sh --bootstrap-server vps-data1:9092,vps-data2:9092,vps-data3:9092 --topic my-topic-test --from-beginning
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+./bin/kafka-topics.sh: This is the command to execute the Kafka topics management tool.
+--create: This specifies that you want to create a new topic.
+--bootstrap-server IP1:9092,IP2:9092,IP3:9092: This specifies the bootstrap servers that the tool should use to connect to the Kafka cluster. The IP addresses of the servers are listed, separated by commas, followed by the port number (9092 is the default port for Kafka).
+--replication-factor 1: This specifies the replication factor for the topic. In a single node setup, we can set this value to 1 to indicate that each partition of the topic will be replicated once.
+--partitions 3: This specifies the number of partitions to create for the topic. In this case, we are creating three partitions for the topic.
+--topic my-topic: This specifies the name of the topic you want to create. In this case, the name is "my-topic".
+
+
+ In a multi-node setup, you need to specify the hostnames or IP addresses of all the nodes in the cluster, separated by commas, followed by the default ZooKeeper port (2181).
